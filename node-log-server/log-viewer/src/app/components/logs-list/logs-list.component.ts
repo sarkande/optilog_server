@@ -5,19 +5,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LogComponent } from '../log/log.component';
 import { Log } from '../../interfaces/log';
+import { FilterLogsPipe } from '../../pipes/filter-logs.pipe';
 
 @Component({
   selector: 'app-logs-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, LogComponent],
+  imports: [CommonModule, FormsModule, LogComponent, FilterLogsPipe],
   templateUrl: './logs-list.component.html',
   styleUrl: './logs-list.component.scss',
 })
 export class LogsListComponent implements OnInit, OnDestroy {
   logs: Log[] = [];
+
   private logSubscription?: Subscription;
   private logInterval: any;
   private _toggleTimestamp: boolean = false;
+  private _searchTerm: string = '';
 
   constructor(private logService: LogService) {}
 
@@ -26,6 +29,13 @@ export class LogsListComponent implements OnInit, OnDestroy {
   }
   set toggleTimestamp(value: boolean) {
     this._toggleTimestamp = value;
+  }
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+  set searchTerm(value: string) {
+    this._searchTerm = value;
   }
 
   ngOnInit() {

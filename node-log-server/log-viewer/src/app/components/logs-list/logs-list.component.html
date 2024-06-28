@@ -3,7 +3,12 @@
   <label for="toggle-timestamp">Show Timestamps</label>
 </div>
 <div>
-  <input type="text" id="search-bar" placeholder="Search logs..." />
+  <input
+    type="text"
+    id="search-bar"
+    placeholder="Search logs..."
+    [(ngModel)]="searchTerm"
+  />
 </div>
 <table id="log-table">
   <thead>
@@ -13,7 +18,7 @@
     </tr>
   </thead>
   <tbody id="log-entries">
-    <ng-container *ngFor="let log of logs">
+    <ng-container *ngFor="let log of logs | filterLogs : searchTerm">
       <tr app-log [log]="log" [toggleTimestamp]="toggleTimestamp"></tr
     ></ng-container>
   </tbody>
