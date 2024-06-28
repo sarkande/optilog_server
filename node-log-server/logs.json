@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2024-06-26 14:23:01",
+    "message": "First log message"
+  },
+  {
+    "timestamp": "2024-06-26 15:45:15",
+    "message": "Second log entry"
+  },
+  {
+    "timestamp": "2024-06-27 08:10:45",
+    "message": "Third log message"
+  }
+]
