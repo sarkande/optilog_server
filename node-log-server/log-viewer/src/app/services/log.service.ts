@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-
-export interface Log {
-  timestamp: string;
-  message: string;
-}
+import { Log } from '../interfaces/log';
 
 @Injectable({
   providedIn: 'root',
