@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  logserver:
+    build: ./node-log-server
+    container_name: node-log-server
+    ports:
+      - "5050:5050"
+      - "4200:4200"
