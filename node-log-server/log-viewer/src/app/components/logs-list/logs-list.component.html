@@ -1,25 +1,32 @@
 <div>
-  <input type="checkbox" id="toggle-timestamp" [(ngModel)]="toggleTimestamp" />
+  <div class="row">
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        id="search-bar"
+        placeholder="Search logs..."
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="clearLogs()">Clear Logs</button>
+    </div>
+  </div>
   <label for="toggle-timestamp">Show Timestamps</label>
+  <input type="checkbox" id="toggle-timestamp" [(ngModel)]="toggleTimestamp" />
+
+  <table id="log-table">
+    <thead>
+      <tr>
+        <th *ngIf="toggleTimestamp">Timestamp</th>
+        <th>Log Messages</th>
+      </tr>
+    </thead>
+    <tbody id="log-entries">
+      <ng-container *ngFor="let log of logs | filterLogs : searchTerm">
+        <tr app-log [log]="log" [toggleTimestamp]="toggleTimestamp"></tr
+      ></ng-container>
+    </tbody>
+  </table>
 </div>
-<div>
-  <input
-    type="text"
-    id="search-bar"
-    placeholder="Search logs..."
-    [(ngModel)]="searchTerm"
-  />
-</div>
-<table id="log-table">
-  <thead>
-    <tr>
-      <th *ngIf="toggleTimestamp">Timestamp</th>
-      <th>Log Messages</th>
-    </tr>
-  </thead>
-  <tbody id="log-entries">
-    <ng-container *ngFor="let log of logs | filterLogs : searchTerm">
-      <tr app-log [log]="log" [toggleTimestamp]="toggleTimestamp"></tr
-    ></ng-container>
-  </tbody>
-</table>

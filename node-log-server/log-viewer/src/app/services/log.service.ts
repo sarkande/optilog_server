@@ -21,6 +21,12 @@ export class LogService {
     );
   }
 
+  clearLogs(): Observable<void> {
+    return this.http.delete<void>(this.logsUrl).pipe(
+      tap(() => this.logsSubject.next([])),
+      catchError(this.handleError)
+    );
+  }
   private handleError(error: any): Observable<never> {
     console.error('An error occurred:', error); // Log to console
     return throwError(error); // Retourner une observable d'erreur

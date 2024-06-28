@@ -53,6 +53,16 @@ export class LogsListComponent implements OnInit, OnDestroy {
       this.logSubscription.unsubscribe();
     }
   }
+  clearLogs() {
+    this.logService.clearLogs().subscribe({
+      next: () => {
+        this.logs = [];
+      },
+      error: (err) => {
+        console.error('Error clearing logs:', err);
+      },
+    });
+  }
 
   private fetchLogs() {
     console.log('Fetching logs');

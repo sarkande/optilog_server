@@ -1,4 +1,41 @@
 <ng-container *ngIf="log">
   <td *ngIf="toggleTimestamp">{{ log.timestamp }}</td>
   <td>{{ log.message }}</td>
+  <td>
+    <button class="btn btn-primary" (click)="openModale(modalContent)">
+      Open
+    </button>
+  </td>
 </ng-container>
+
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Modal title</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body" *ngIf="log">
+    <div *ngIf="log?.message">
+      <ng-container *ngIf="isJsonString(log.message); else simpleMessage">
+        <ngx-json-viewer [json]="parseJson(log.message)"></ngx-json-viewer>
+      </ng-container>
+      <ng-template #simpleMessage>
+        <p>{{ log.message }}</p>
+      </ng-template>
+    </div>
+    <p *ngIf="toggleTimestamp">{{ log.timestamp }}</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

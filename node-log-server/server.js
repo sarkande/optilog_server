@@ -79,7 +79,16 @@ app.get("/logs", (req, res) => {
     res.json(logs);
   });
 });
-
+app.delete("/logs", (req, res) => {
+  console.log("Deleting logs");
+  writeLogs([], (err) => {
+    if (err) {
+      console.error("Failed to delete logs:", err);
+      return res.sendStatus(500);
+    }
+    res.sendStatus(200);
+  });
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
